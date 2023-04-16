@@ -1,0 +1,500 @@
+.tab {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  margin: 0;
+  color: var(--font-color1);
+  text-align: center;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: var(--panel-bg-color);
+  color: var(--font-color2);
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: 0.3s;
+  font-size: 17px;
+  width: 50%;
+  border-bottom: 2px solid var(--panel-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: var(--panel-bg-color2);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  border-bottom: 2px solid var(--font-color2);
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  text-align: center;
+}
+
+.tab label {
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+.slider-value {
+  width: 34px;
+  text-align: right;
+}
+
+.stat-icon {
+  margin-right: 8px;
+}
+
+.stat-slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  color: var(--font-color2);
+}
+
+.stat-slider p {
+  transition: color 0.3s ease-in-out;
+}
+
+.stat-slider:hover p {
+  color: var(--font-color1);
+}
+
+.stats-panel{
+  text-align: center;
+}
+
+/* Colors for each slider */
+.health:hover img {
+  filter: invert(38%) sepia(38%) saturate(1012%) hue-rotate(314deg)
+    brightness(100%) contrast(82%);
+}
+
+.energy:hover img {
+  filter: invert(79%) sepia(43%) saturate(803%) hue-rotate(334deg)
+    brightness(101%) contrast(101%);
+}
+
+.rest:hover img {
+  filter: invert(45%) sepia(57%) saturate(843%) hue-rotate(203deg)
+    brightness(103%) contrast(91%);
+}
+
+.fullness:hover img {
+  filter: invert(34%) sepia(86%) saturate(693%) hue-rotate(348deg)
+    brightness(94%) contrast(92%);
+}
+
+.hydration:hover img {
+  filter: invert(76%) sepia(10%) saturate(1745%) hue-rotate(167deg)
+    brightness(102%) contrast(103%);
+}
+
+.affection:hover img{
+  filter:invert(72%) sepia(7%) saturate(1919%) hue-rotate(305deg)
+    brightness(109%) contrast(103%);
+}
+
+.courage:hover img{
+  filter: invert(74%) sepia(23%) saturate(1010%) hue-rotate(86deg)
+    brightness(89%) contrast(84%);
+}
+
+.chrome {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.slider {
+  transition: 0.3s ease-in-out;
+  background: linear-gradient(
+    to right,
+    var(--font-color2) 0%,
+    var(--font-color2) 50%,
+    var(--main-bg-color) 50%,
+    var(--main-bg-color) 100%
+  );
+  border-radius: 8px;
+  height: 5px;
+  width: 100%;
+  height: 4px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  accent-color: var(--font-color2);
+  margin-top: -5px;
+}
+
+.fill-button {
+  font-family: var(--font1);
+  font-size: 16px;
+  color: var(--font-color2);
+  background-color: var(--panel-bg-color);
+  padding: 0px;
+  padding: 4px 8px;
+  margin: 8px;
+  border: none;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.fill-button:hover {
+  cursor: pointer;
+  background-color: var(--panel-bg-color2);
+}
+
+.fill-button img,
+label:hover {
+  cursor: pointer;
+}
+
+.form-control {
+  font-size: 16px;
+  line-height: 1.15;
+  color:var(--font-color2);
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: left;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+input[type="checkbox"] {
+  vertical-align: middle;
+  appearance: none;
+  background-color: var(--font-color2);
+  margin: 0;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 4px;
+  display: flex; /* use flex instead of grid */
+  align-items: center; /* center vertically */
+  justify-content: center; /* center horizontally */
+  transition: 0.3s ease-in-out;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+
+input[type="checkbox"]:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: var(--font-color1);
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--panel-bg-color);
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  background-color: var(--font-color1);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--font-color1) !important;
+}
+
+#save-options{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color:var(--font-color2);
+  margin:8px;
+}
+
+#sort-options{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  color:var(--font-color2);
+}
+
+#sort-options p{
+  margin-left:0px;
+  margin-right: 6px;
+  transition: 0.3s ease-in-out;
+}
+
+#sortNewest:hover{
+  cursor: pointer;
+  color:var(--font-color1);
+}
+
+#sortOldest:hover{
+  cursor: pointer;
+  color:var(--font-color1);
+}
+
+#sortDay:hover{
+  cursor: pointer;
+  color:var(--font-color1);
+}
+
+#sortDifficulty:hover{
+  cursor: pointer;
+  color:var(--font-color1);
+}
+
+.sortSelected{
+  color:var(--font-color1);
+}
+
+
+#Inventory{
+  display:flex;
+  flex-direction: row;
+  padding:0;
+  position: relative;
+  height:300px;
+}
+/* INVENTORY TAB */
+/* * {box-sizing: border-box} */
+
+/* Style the tab */
+#increment-options{
+  display: flex;
+  flex-direction: row;
+  color:var(--font-color2);
+  background-color: var(--panel-bg-color2);
+  padding:8px;
+  border-radius: 8px;
+}
+
+.inventory-spacer{
+  height:40px;
+  width:10px;
+}
+
+#increment-options p{
+  margin-left:0px;
+  margin-right: 6px;
+  transition: 0.3s ease-in-out;
+}
+
+#increment-selection{
+  position: absolute;
+  bottom:8px;
+  transition: 0.3s;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+}
+#increment1:hover, #increment5:hover, #increment10:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.gametype-spacer{
+width: 100%;
+display: flex;
+justify-content: center;
+}
+.gametype-spacer img{
+  margin-right:8px;
+  margin-bottom: 8px;
+}
+
+.incrementSelected{
+  color:var(--font-color1);
+}
+.inventory-tab {
+  position: absolute;
+  left:0;
+  top:0;
+  overflow: hidden;
+  padding: 0px;
+  text-align: center;
+  background-color: var(--panel-bg-color);
+  width: 135px;
+  height: 300px;
+  overflow-y: scroll;
+  border-radius: 0 0 0 8px;
+  z-index: 1;
+  width:30px;
+  transition: 0.3s ease-in-out;
+}
+
+.inventory-tab:hover{
+  width:135px;
+  box-shadow: 10px 1px 39px -32px rgba(0,0,0,0.75);
+  color: var(--font-color2);
+}
+
+/* Style the buttons that are used to open the tab content */
+.inventory-tab button {
+  display: block;
+  background-color: var(--panel-bg-color);
+  color: var(--font-color1);
+  padding: 8px;
+  margin:0px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size:16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif !important;
+  color: var(--font-color2);
+  color: var(--panel-bg-color);
+}
+
+.inventory-tab:hover button{
+  color: var(--font-color2);
+}
+
+.inventory-tab img{
+  filter: var(--icon-color2);
+  transition: transform 0.3s ease-in-out;
+  margin-left:4px;
+}
+
+/* Change background color of buttons on hover */
+.inventory-tab button:hover {
+  background-color: var(--panel-bg-color2);
+}
+
+/* Create an active/current "tab button" class */
+.inventory-tab button.active {
+  color: var(--font-color1);
+}
+
+.inventory-tab button.active img{
+  filter: var(--icon-color);
+  transform: scale(1.2);
+}
+
+/* Style the tab content */
+.inventory-tabcontent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height:300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 572px;
+  position: absolute;
+  top:0;
+  left:30px;
+  z-index: 0;
+  align-content: start;
+}
+
+
+/* SCROLLBAR */
+
+ /* width */
+ ::-webkit-scrollbar {
+  width: 2px;
+  margin-left:-2px;
+  display: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: none;
+} 
+
+.inventory-button{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: left !important;
+  align-items: center;
+  background-color: var(--panel-bg-color);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.inventory-button img {
+  margin-right: 8px;
+}
+
+.inventory-item-label{
+  font-size: 16px;
+  color:var(--font-color2);
+  gap: 4px;
+  margin:8px;
+  text-align: left;
+}
+
+/*NEW VERSION*/
+.inventory-item{
+  height:50px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.inventory-item input[type="checkbox"]{
+  margin:8px;
+}
+
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--font-color1) !important;
+}
+
+/* QUANTITY SCROLLER */
+.quantity-scroller{
+  transition: 0.3s ease-in-out;
+  width:30px;
+  height:16px;
+  font-size: 14px;
+  border-radius: 8px;
+  /* padding:2px; */
+  padding-bottom: 3px;
+  background-color: var(--font-color2);
+  color:var(--panel-bg-color);
+  text-align: center;
+  flex-shrink: 0;
+  margin:8px;
+}
+
+.quantity-scroller:hover{
+  background-color: var(--font-color1);
+  transform: scale(1.1);
+  text-align: center;
+}
+

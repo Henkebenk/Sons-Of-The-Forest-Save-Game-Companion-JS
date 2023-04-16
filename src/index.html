@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sons Of The Forest | Save Game Companion</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="player-tab.css" />
+    <link rel="stylesheet" href="map.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <img
+        onclick="toggleTheme()"
+        src="images/shared/lightMode.png"
+        id="themeToggle"
+        title="Toggle theme"
+      />
+      <div class="vertical-button-bar">
+        <img
+        onclick="null"
+        src="images/shared/icons/load.svg"
+        id="load-icon"
+        title=""
+        />
+        <img
+          onclick="writeSaveData()"
+          src="images/shared/icons/save.svg"
+          id="save-icon"
+          title="Save changes"
+        />
+        <!-- <div class="button-divider"></div> -->
+      </div>
+      <div id="top-bar">
+        <div class="logo-container">
+          <div id="front-front">
+            <img src="images/shared/logoLeft.svg" id="logoLeft">
+          </div>
+          <img src="images/shared/logoRight.svg" id="logoRight">
+        </div>
+        
+        <div class="socials">
+          <a href="https://discord.com/users/239492616524267520" target="_blank">
+            <img
+            src="images/shared/icons/discord.svg"
+            >
+          </a>  
+          <a href="https://www.reddit.com/user/Henkebenk01" target="_blank"b >
+            <img
+            src="images/shared/icons/reddit.svg"
+            >
+          </a>  
+               
+        <img
+        src="images/shared/icons/mail.svg"
+        >
+        </div>
+      </div>
+
+    </nav>
+    <main>
+      <!-- ALL SAVES PANEL -->
+      <div class="mainPanel" id="saves-directory-manager">
+        <h3>
+          Save directory <span class="green" id="detected">detected</span><button
+          id="select-dir-btn"
+          class="filechooser-button"
+          title="Choose folder"
+        >
+          <img
+            src="images/shared/icons/filechooser.svg"
+            alt="filechooser"
+            class="icon16"
+          />
+        </button>
+        </h3>
+        <div id="save-options">
+          <div id="sort-options">
+            <p>Sort by:</p><p id="sortNewest" class="sortSelected" onclick="sortSaves('newest')">Newest</p><p id="sortOldest" onclick="sortSaves('oldest')">Oldest</p><p id="sortDay" onclick="sortSaves('day')">Day</p><p id="sortDifficulty" onclick="sortSaves('difficulty')">Difficulty</p>
+          </div>         
+          <label class="form-control">
+            <input type="checkbox" name="checkbox" id="toggleSaveNames" onclick="toggleSaveNames()"/>
+            Show filenames
+          </label>  
+        </div>   
+      </div>
+
+      <!-- SAVE LIST -->
+      <div id="savesList">
+      </div>
+      
+      <!-- SAVE PANEL -->
+      <div class="mainPanel">
+        <div class="savePanel">
+          <div>
+            <img
+              src="images/shared/saveThumbPlaceholder.png"
+              class="saveThumb"
+              id="saveThumb"
+            />
+          </div>
+          <div>
+            <p id="date">Friday, April 01, 2023</p>
+            <span class="font2"
+              ><p id="day-difficulty">Day:58 - Normal</p>
+              <p id="spawn">X crash-site</p>
+              <p id="story-complete">Story X completed</p></span
+            >
+          </div>
+          <div id="difficulty">
+            <p class="label-with-icon">
+              <img
+                src="images/shared/icons/difficulty.svg"
+                alt="difficulty"
+                class="icon16"
+              />
+              Change difficulty
+            </p>
+            <button>Peaceful</button>
+            <button>Normal</button>
+            <button>Hard</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLAYER PANEL -->
+      <div class="mainPanel">
+        <img src="images/shared/playerCropped.jpg" class="playerImage" />
+
+        <div class="tab">
+          <button class="tablinks active" onclick="switchTab(event, 'Stats')">
+            <label class="label-with-icon"
+              ><img
+                src="images/shared/icons/stats.svg"
+                alt="difficulty"
+                class="icon16"
+              />
+              Stats</label
+            >
+          </button>
+          <button class="tablinks" onclick="switchTab(event, 'Inventory')">
+            <label class="label-with-icon"
+              ><img
+                src="images/shared/icons/inventory.svg"
+                alt="difficulty"
+                class="icon16"
+              />
+              Inventory</label
+            >
+          </button>
+        </div>
+
+        <!-- PLAYER PANEL - Stats -->
+        <div id="Stats" class="tabcontent stats-panel" style="display: block">
+          <div class="position-panel">
+            <p>Position:</p>
+            <p id="player-position">X: Y: Z:</p>
+          </div>
+
+          <div class="stat-slider health">
+            <img
+              class="icon16 stat-icon"
+              src="images/shared/icons/health.svg"
+              id="health-icon"
+              title="Health"
+            />
+            <div class="chrome">
+              <input
+                id="player-health-input"
+                min="0"
+                max="100"
+                type="range"
+                value="50"
+                class="slider"
+              />
+            </div>
+            <p id="slider-value-player-health" class="slider-value">50</p>
+          </div>
+
+          <div class="stat-slider energy">
+            <img
+              class="icon16 stat-icon"
+              src="images/shared/icons/energy.svg"
+              id="energy-icon"
+              title="Energy"
+            />
+            <div class="chrome">
+              <input
+                id="player-energy-input"
+                min="0"
+                max="100"
+                type="range"
+                value="50"
+                class="slider"
+              />
+            </div>
+            <p id="slider-value-player-energy" class="slider-value">50</p>
+          </div>
+
+          <div class="stat-slider rest">
+            <img
+              class="icon16 stat-icon"
+              src="images/shared/icons/rest.svg"
+              id="rest-icon"
+              title="Rest"
+            />
+            <div class="chrome">
+              <input
+                id="player-rest-input"
+                min="0"
+                max="100"
+                type="range"
+                value="50"
+                class="slider"
+              />
+            </div>
+            <p id="slider-value-player-rest" class="slider-value">50</p>
+          </div>
+
+          <div class="stat-slider fullness">
+            <img
+              class="icon16 stat-icon"
+              src="images/shared/icons/fullness.svg"
+              id="fullness-icon"
+              title="Fullness"
+            />
+            <div class="chrome">
+              <input
+                id="player-fullness-input"
+                min="0"
+                max="100"
+                type="range"
+                value="50"
+                class="slider"
+              />
+            </div>
+            <p id="slider-value-player-fullness" class="slider-value">50</p>
+          </div>
+
+          <div class="stat-slider hydration">
+            <img
+              class="icon16 stat-icon"
+              src="images/shared/icons/hydration.svg"
+              id="hydration-icon"
+              title="Hydration"
+            />
+            <div class="chrome">
+              <input
+                id="player-hydration-input"
+                min="0"
+                max="100"
+                type="range"
+                value="50"
+                class="slider"
+              />
+            </div>
+            <p id="slider-value-player-hydration" class="slider-value">50</p>
+          </div>
+
+          <button class="fill-button" onclick="playerFillStats()">
+            <label class="label-with-icon"
+              ><img class="icon16" src="images/shared/icons/fill.svg" /> Fill
+              all stats</label
+            >
+          </button>
+        </div>
+
+        <!-- PLAYER PANEL - Inventory -->
+        <div id="Inventory" class="tabcontent" style="display: none;">
+          
+          <div class="inventory-tab">
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'weapons')"><img class="icon16" src="images/shared/icons/inventory/weapons.svg">Weapons</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'attachments')"><img class="icon16" src="images/shared/icons/inventory/attachments.svg">Attachments</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'ammo')"><img class="icon16" src="images/shared/icons/inventory/ammo.svg">Ammo</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'throwable')"><img class="icon16" src="images/shared/icons/inventory/throwable.svg">Throwable</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'tools')"><img class="icon16" src="images/shared/icons/inventory/tools.svg">Tools</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'printed')"><img class="icon16" src="images/shared/icons/inventory/printed.svg">Printed</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'clothing')"><img class="icon16" src="images/shared/icons/inventory/clothing.svg">Clothing</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'armor')"><img class="icon16" src="images/shared/icons/inventory/armor.svg">Armor</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'food')"><img class="icon16" src="images/shared/icons/inventory/food.svg">Food</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'plants')"><img class="icon16" src="images/shared/icons/inventory/plants.svg">Plants</button>
+            <button class="inventory-tablinks inventory-button" onclick="openInventoryTab(event, 'other')"><img class="icon16" src="images/shared/icons/inventory/other.svg">Other</button>
+          </div>
+          
+          <div id="weapons" class="inventory-tabcontent">
+          </div>
+          
+          <div id="attachments" class="inventory-tabcontent" style="display: none;">
+          </div>
+          
+          <div id="ammo" class="inventory-tabcontent" style="display: none;">
+          </div> 
+          <div id="throwable" class="inventory-tabcontent" style="display: none;">
+          </div>
+          
+          <div id="tools" class="inventory-tabcontent" style="display: none;">
+          </div>
+          
+          <div id="printed" class="inventory-tabcontent" style="display: none;">
+          </div> 
+
+          <div id="clothing" class="inventory-tabcontent" style="display: none;">
+          </div>
+          
+          <div id="armor" class="inventory-tabcontent" style="display: none;">
+          </div>
+          
+          <div id="food" class="inventory-tabcontent" style="display: none;">
+          </div> 
+
+          <div id="plants" class="inventory-tabcontent" style="display: none;">
+          </div>
+          
+          <div id="other" class="inventory-tabcontent" style="display: none;">
+          </div>
+          
+          <div id="increment-selection">
+            <div id="increment-options">
+              <p>Increment by:</p><p id="increment1" class="incrementSelected" onclick="changeStep(1)">1</p><p id="increment5" onclick="changeStep(5)">5</p><p id="increment10" onclick="changeStep(10)">10</p>
+            </div> 
+          </div>
+
+        </div>
+        
+      </div>
+
+      <!-- COMPANIONS PANEL -->
+      <div class="splitPanel">
+
+        <!-- KELVIN -->
+        <div class="companionPanel">
+          <img src="images/shared/kelvinCropped.jpg" class="companionImage" />
+          <div class="stats-panel">
+            <div class="position-panel">
+              <p>Position:</p>
+              <p id="kelvin-position">X: Y: Z:</p>
+            </div>
+            <div class="position-panel">
+              <p>Status:</p>
+              <p id="kelvin-alive-status"><span class="green">Alive</span></p>
+            </div>
+
+            <div class="stat-slider health">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/health.svg"
+                id="health-icon"
+                title="Health"
+              />
+              <div class="chrome">
+                <input
+                  id="kelvin-health-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-kelvin-health" class="slider-value">50</p>
+            </div>
+
+            <div class="stat-slider energy">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/energy.svg"
+                id="energy-icon"
+                title="Energy"
+              />
+              <div class="chrome">
+                <input
+                  id="kelvin-energy-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-kelvin-energy" class="slider-value">50</p>
+            </div>
+  
+            <div class="stat-slider hydration">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/hydration.svg"
+                id="hydration-icon"
+                title="Hydration"
+              />
+              <div class="chrome">
+                <input
+                  id="kelvin-hydration-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-kelvin-hydration" class="slider-value">50</p>
+            </div>
+
+            <div class="stat-slider courage">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/courage.svg"
+                id="courage-icon"
+                title="Courage"
+              />
+              <div class="chrome">
+                <input
+                  id="kelvin-courage-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-kelvin-courage" class="slider-value">50</p>
+            </div>
+  
+            <div class="stat-slider affection">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/affection.svg"
+                id="affection-icon"
+                title="Affection"
+              />
+              <div class="chrome">
+                <input
+                  id="kelvin-affection-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-kelvin-affection" class="slider-value">50</p>
+            </div>
+
+            <button class="fill-button" onclick="kelvinFillStats()">
+              <label class="label-with-icon"
+                ><img class="icon16" src="images/shared/icons/fill.svg" /> Fill
+                all stats</label
+              >
+            </button>
+          </div>
+        </div>
+
+        <!-- VIRGINIA -->
+        <div class="companionPanel">
+          <img src="images/shared/virginiaCropped.jpg" class="companionImage" />
+          <div class="stats-panel">
+            <div class="position-panel">
+              <p>Position:</p>
+              <p id="virginia-position">X: Y: Z:</p>
+            </div>
+            <div class="position-panel">
+              <p>Status:</p>
+              <p id="virginia-alive-status"><span class="green">Alive</span></p>
+            </div>
+
+            <div class="stat-slider health">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/health.svg"
+                id="health-icon"
+                title="Health"
+              />
+              <div class="chrome">
+                <input
+                  id="virginia-health-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-virginia-health" class="slider-value">50</p>
+            </div>
+
+            <div class="stat-slider energy">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/energy.svg"
+                id="energy-icon"
+                title="Energy"
+              />
+              <div class="chrome">
+                <input
+                  id="virginia-energy-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-virginia-energy" class="slider-value">50</p>
+            </div>
+  
+            <div class="stat-slider hydration">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/hydration.svg"
+                id="hydration-icon"
+                title="Hydration"
+              />
+              <div class="chrome">
+                <input
+                  id="virginia-hydration-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-virginia-hydration" class="slider-value">50</p>
+            </div>
+
+            <div class="stat-slider courage">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/courage.svg"
+                id="courage-icon"
+                title="Courage"
+              />
+              <div class="chrome">
+                <input
+                  id="virginia-courage-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-virginia-courage" class="slider-value">50</p>
+            </div>
+  
+            <div class="stat-slider affection">
+              <img
+                class="icon16 stat-icon"
+                src="images/shared/icons/affection.svg"
+                id="affection-icon"
+                title="Affection"
+              />
+              <div class="chrome">
+                <input
+                  id="virginia-affection-input"
+                  min="0"
+                  max="100"
+                  type="range"
+                  value="50"
+                  class="slider"
+                />
+              </div>
+              <p id="slider-value-virginia-affection" class="slider-value">50</p>
+            </div>
+
+            <button class="fill-button" onclick="virginiaFillStats()">
+              <label class="label-with-icon"
+                ><img class="icon16" src="images/shared/icons/fill.svg" /> Fill
+                all stats</label
+              >
+            </button>
+          </div>     
+        </div>
+      </div>
+
+      <!-- MAP PANEL -->
+      <div class="mainPanel">
+        <div id="map"></div>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="renderer.js"></script>
+    <script src="ui.js"></script>
+    <script src="map.js"></script>
+    <script>
+      window.onload = function() {
+        detectSaves();
+      };
+    </script>
+    </body>
+</html>
+
+    
