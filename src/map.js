@@ -129,46 +129,46 @@ recenterButton.onAdd = function(map) {
 
 recenterButton.addTo(map);
 
-// Add an event listener to update the size of the image overlay when the map is resized
-map.on('resize', function() {
-  image.setBounds(map.getBounds());
-});
+// // Add an event listener to update the size of the image overlay when the map is resized
+// map.on('resize', function() {
+//   image.setBounds(map.getBounds());
+// });
 
-// Get a reference to the image overlay layer
-var imageOverlay = map._layers[L.stamp(image)];
+// // Get a reference to the image overlay layer
+// var imageOverlay = map._layers[L.stamp(image)];
 
-// Add an event listener to the map that will update the size of the image when the map is resized
-map.on('resize', function() {
-  var mapWidth = map.getSize().x;
-  var mapHeight = map.getSize().y;
-  imageOverlay._image.style.width = mapWidth + 'px';
-  imageOverlay._image.style.height = mapHeight + 'px';
-});
+// // Add an event listener to the map that will update the size of the image when the map is resized
+// map.on('resize', function() {
+//   var mapWidth = map.getSize().x;
+//   var mapHeight = map.getSize().y;
+//   imageOverlay._image.style.width = mapWidth + 'px';
+//   imageOverlay._image.style.height = mapHeight + 'px';
+// });
 
 // Disable default behavior for opening popups
-map.options.maxZoom = map.options.minZoom;
-map.options.doubleClickZoom = false;
-map.options.scrollWheelZoom = false;
-map.options.touchZoom = false;
-map.options.boxZoom = false;
-map.options.tap = false;
-map.options.keyboard = false;
-map.options.dragging = false;
-map.touchZoom.disable();
-map.doubleClickZoom.disable();
-map.scrollWheelZoom.disable();
+// map.options.maxZoom = map.options.minZoom;
+// map.options.doubleClickZoom = false;
+// map.options.scrollWheelZoom = false;
+// map.options.touchZoom = false;
+// map.options.boxZoom = false;
+// map.options.tap = false;
+// map.options.keyboard = false;
+// map.options.dragging = false;
+// map.touchZoom.disable();
+// map.doubleClickZoom.disable();
+// map.scrollWheelZoom.disable();
 
 marker.on('click', function(e) {
   map.setView(e.target.getLatLng(), map.getZoom());
 });
 
 // Add an event listener to update the map center when the map container is resized
-map.on('resize', function() {
-  var oldCenterPoint = map.latLngToContainerPoint(map.getCenter());
-  var newMapWidth = map.getSize().x;
-  var newMapHeight = map.getSize().y;
-  var newCenterPoint = L.point(newMapWidth / 2, newMapHeight / 2);
-  var diff = newCenterPoint.subtract(oldCenterPoint);
-  var newCenterLatLng = map.containerPointToLatLng(oldCenterPoint.add(diff));
-  map.setView(newCenterLatLng, map.getZoom());
-});
+// map.on('resize', function() {
+//   var oldCenterPoint = map.latLngToContainerPoint(map.getCenter());
+//   var newMapWidth = map.getSize().x;
+//   var newMapHeight = map.getSize().y;
+//   var newCenterPoint = L.point(newMapWidth / 2, newMapHeight / 2);
+//   var diff = newCenterPoint.subtract(oldCenterPoint);
+//   var newCenterLatLng = map.containerPointToLatLng(oldCenterPoint.add(diff));
+//   map.setView(newCenterLatLng, map.getZoom());
+// });
