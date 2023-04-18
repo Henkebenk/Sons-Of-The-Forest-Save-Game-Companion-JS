@@ -162,13 +162,3 @@ marker.on('click', function(e) {
   map.setView(e.target.getLatLng(), map.getZoom());
 });
 
-// Add an event listener to update the map center when the map container is resized
-// map.on('resize', function() {
-//   var oldCenterPoint = map.latLngToContainerPoint(map.getCenter());
-//   var newMapWidth = map.getSize().x;
-//   var newMapHeight = map.getSize().y;
-//   var newCenterPoint = L.point(newMapWidth / 2, newMapHeight / 2);
-//   var diff = newCenterPoint.subtract(oldCenterPoint);
-//   var newCenterLatLng = map.containerPointToLatLng(oldCenterPoint.add(diff));
-//   map.setView(newCenterLatLng, map.getZoom());
-// });
