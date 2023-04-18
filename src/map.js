@@ -105,9 +105,11 @@ fullscreenButton.onAdd = function(map) {
   button.innerHTML = '⛶';
   button.title = 'Fullscreen';
   button.addEventListener('click', () => {
+    map.fitBounds(bounds);
     const mapContainer = document.getElementById('map');
     mapContainer.classList.toggle('fullscreen');
   });
+  map.fitBounds(bounds);
   return button;
 };
 
@@ -159,6 +161,6 @@ recenterButton.addTo(map);
 // map.scrollWheelZoom.disable();
 
 marker.on('click', function(e) {
-  map.setView(e.target.getLatLng(), map.getZoom());
+  // map.setView(e.target.getLatLng(), map.getZoom());
 });
 
