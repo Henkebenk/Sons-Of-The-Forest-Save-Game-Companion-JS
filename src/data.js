@@ -10,6 +10,7 @@ let playerStateSaveData;
 let playerInventorySaveData;
 let saveData;
 let worldItemManagerSaveData;
+let worldObjectLocatorManagerSaveData;
 const username = os.userInfo().username;
 const defaultSaveDir = `C:\\Users\\${username}\\AppData\\LocalLow\\Endnight\\SonsOfTheForest\\Saves`;
 const directoryLabel = document.getElementById("directory");
@@ -271,7 +272,19 @@ async function loadSaveFile(){
     });
   });
 
-  await Promise.all([gameStatePromise, playerStatePromise, playerInventoryPromise, saveDataPromise, /*worldItemManagerSaveDataPromise*/]);
+  const worldObjectLocatorManagerSaveDataPromise = new Promise((resolve, reject) => {
+    fs.readFile(currentSavePath + '/WorldObjectLocatorManagerSaveData.json', "utf-8", (err, data) => {
+      if (err) {
+        console.error(err);
+        reject();
+      } else {
+      worldObjectLocatorManagerSaveData = JSON.parse(data);
+        resolve();
+      }
+    });
+  });
+
+  await Promise.all([gameStatePromise, playerStatePromise, playerInventoryPromise, saveDataPromise, worldItemManagerSaveDataPromise, worldObjectLocatorManagerSaveDataPromise]);
 }
 // ---[WRITING]---
 

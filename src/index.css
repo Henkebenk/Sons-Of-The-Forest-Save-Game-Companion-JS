@@ -438,6 +438,39 @@ label:hover {
   display: none;
 }
 
+#environment-panel{
+  padding:8px;
+}
+
+.tree-buttons{
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-button{
+  font-family: var(--font1);
+  font-size: 16px;
+  color: var(--font-color2);
+  background-color: var(--panel-bg-color);
+  padding: 0px;
+  padding: 4px 8px;
+  margin: 8px;
+  border: none;
+  border-radius: 4px;
+  transition: 0.3s;
+  width:200px;
+}
+
+.tree-button:hover {
+  cursor: pointer;
+  background-color: var(--panel-bg-color2);
+}
+
+.tree-button img,
+label:hover {
+  cursor: pointer;
+}
+
 /* Icons */
 .icon16 {
   width: 16px;

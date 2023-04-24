@@ -581,6 +581,28 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
       </div>
 
+      <!-- ENVIRONMENT PANEL -->
+      <div class="mainPanel">
+        <img src="images/shared/environment.png" class="playerImage" /> 
+        <div id="environment-panel">
+          <div class="position-panel">
+            <p>Number of trees cut:</p>
+            <p id="trees-cut">100x</p>
+          </div>
+          <div class ="tree-buttons">
+            <button class="tree-button" onclick="playerFillStats()">
+              <label class="label-with-icon"><img class="icon16" src="images/shared/icons/fill.svg" />Regrow all trees</label>
+            </button>
+            <button class="tree-button" onclick="playerFillStats()">
+              <label class="label-with-icon"><img class="icon16" src="images/shared/icons/fill.svg" />Only regrow stumps</label>
+            </button>
+            <button class="tree-button" onclick="playerFillStats()">
+              <label class="label-with-icon"><img class="icon16" src="images/shared/icons/fill.svg" />Load state from save</label>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </main>
 
     <!-- Scripts -->
