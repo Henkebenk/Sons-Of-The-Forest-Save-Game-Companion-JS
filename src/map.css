@@ -1,4 +1,8 @@
 /* Leaflet map */
+#map-panel{
+  max-width: none;
+}
+
 #map {
     height: 0;
     width: 100%;
