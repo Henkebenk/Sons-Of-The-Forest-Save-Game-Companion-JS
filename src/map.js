@@ -105,11 +105,10 @@ fullscreenButton.onAdd = function(map) {
   button.innerHTML = '⛶';
   button.title = 'Fullscreen';
   button.addEventListener('click', () => {
-    map.fitBounds(bounds);
     const mapContainer = document.getElementById('map');
     mapContainer.classList.toggle('fullscreen');
+    map.fitBounds(bounds);
   });
-  map.fitBounds(bounds);
   return button;
 };
 

@@ -37,6 +37,7 @@ async function loadSaveTypeFolder(fullSaveDirPath, gameType) {
 
     for (const subdir of subdirs) {
         const saveName = subdir.name;
+        let customSaveName = "";
 
         // TODO: Check if this fixed the issue on Main PC
         if (saveName.endsWith(".zip") || !(fullSaveDirPath + "\\" + gameType + '\\' + saveName +  '\\SaveDataThumbnail.png')) {
@@ -79,6 +80,28 @@ async function loadSaveTypeFolder(fullSaveDirPath, gameType) {
         const filenameSpan = div.appendChild(document.createElement("span"));
         filenameSpan.textContent = '[' + saveName + ']';
         filenameSpan.classList.add("fileName");
+
+        //Check if there is custom name for save
+        fs.readdir(fullSaveDirPath + "\\" + gameType + '\\' + saveName, (err, files) => {
+          if (err) {
+            console.error(err);
+          } else {
+            const matchingFiles = files.filter(file => file.endsWith('.name'));
+            if (matchingFiles.length > 0) {
+              customSaveName = matchingFiles[0];
+              customSaveName = customSaveName.replace("_", " ");
+              customSaveName = customSaveName.replace(".name", "");
+
+              // -- Create custom file name span
+              const customNameSpan = div.appendChild(document.createElement("span"));
+              customNameSpan.textContent = customSaveName + '  ';
+              customNameSpan.classList.add("customFileName", "green");
+            } else {
+              //Do sum
+            }
+          }
+        });
+
 
         
         readInitialSaveInfo(fullSaveDirPath + '\\' + gameType + '\\' + subdir.name, (saveDataInfo) => {

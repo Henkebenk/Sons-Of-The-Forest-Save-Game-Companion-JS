@@ -308,6 +308,10 @@ p {
   margin: 8px;
 }
 
+.customFileName{
+  margin-right:4px;
+}
+
 #difficulty {
   align-items: center;
 }
